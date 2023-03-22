@@ -1,0 +1,114 @@
+@use 'sass:math';
+@function pxToRem($pxValue) {
+	@return math.div($pxValue, 16px) * 1rem;
+}
+
+main {
+	font-family: 'Merriweather', serif;
+	display: flex;
+	height: 100vh;
+	overflow: hidden;
+	color: #eaece9;
+
+	.isMobile {
+		display: none;
+	}
+
+	.reservation-list-container {
+		background-color: #050517;
+
+		.list {
+			display: flex;
+			flex-direction: column;
+			gap: pxToRem(40px);
+			margin-top: pxToRem(30px);
+			max-width: pxToRem(450px);
+			padding-left: pxToRem(20px);
+			overflow-x: hidden;
+			max-height: 95vh;
+			.reservation {
+				padding: pxToRem(10px);
+				display: flex;
+				flex-direction: column;
+				gap: pxToRem(10px);
+
+				&:hover {
+					background-color: rgba($color: #fff, $alpha: 0.1);
+					cursor: pointer;
+				}
+				.name {
+					font-size: pxToRem(20px);
+				}
+
+				.email {
+					font-size: pxToRem(15px);
+				}
+
+				.size {
+					font-size: pxToRem(15px);
+				}
+			}
+		}
+	}
+
+	.reservation-content-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		background-color: #0b0b32;
+		.content {
+			background-color: rgba($color: #fff, $alpha: 0.05);
+			padding: pxToRem(40px);
+			display: flex;
+			flex-direction: column;
+			gap: pxToRem(20px);
+
+			.content-name {
+				font-size: pxToRem(50px);
+			}
+			.content-email,
+			.content-size {
+				font-size: pxToRem(30px);
+			}
+
+			.check-in-btn {
+				background-color: rgba($color: #8d2ca0, $alpha: 0.8);
+				border: none;
+				border-radius: pxToRem(20px);
+				width: pxToRem(200px);
+				height: pxToRem(50px);
+				font-family: inherit;
+				color: #eaece9;
+				font-size: pxToRem(20px);
+
+				&:hover {
+					background-color: #8d2ca0;
+					cursor: pointer;
+					transition: all 1s;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	main {
+		display: none;
+	}
+
+	.isMobile {
+		display: flex;
+		height: 100vh;
+		width: 100vw;
+		align-items: center;
+		justify-content: center;
+		font-size: pxToRem(30px);
+		text-align: center;
+		background-color: rgba($color: #eaece9, $alpha: 1);
+
+		div {
+			max-width: pxToRem(400px);
+		}
+	}
+}
