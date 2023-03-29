@@ -10,9 +10,7 @@ main {
 	overflow: hidden;
 	color: #eaece9;
 
-	.isMobile {
-		display: none;
-	}
+	
 
 	.reservation-list-container {
 		background-color: #050517;
@@ -65,7 +63,7 @@ main {
 			gap: pxToRem(20px);
 
 			.content-name {
-				font-size: pxToRem(50px);
+				font-size: pxToRem(40px);
 			}
 			.content-email,
 			.content-size {
@@ -91,7 +89,9 @@ main {
 		}
 	}
 }
-
+.isMobile {
+		display: none;
+	}
 @media (max-width: 768px) {
 	main {
 		display: none;

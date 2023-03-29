@@ -29,20 +29,24 @@ function App() {
 		reservations.map((reservation) => {
 			if (id === reservation._id) {
 				setCurrentReservation(reservation);
+				
 			}
 		});
 	}
 
 	const handleCheckIn = async (id) => {
 		const response = await fetch(
-			`http://localhost:4000/api/reservations/${id}`,
+			`https://reservation-api-ujvu.onrender.com/${id}`,
 			{
 				method: `DELETE`,
 			},
 		);
 		toast('Reseravtion Checked in!');
-		setCurrentReservation('');
+		setCurrentReservation(reservations)
 	};
+
+
+	
 
 	return (
 		<>
@@ -53,14 +57,17 @@ function App() {
 						{reservations.map(({ name, email, date, people, _id }) => {
 							const formattedDateTime = `${new Date(
 								date,
-							).toLocaleDateString()} / ${new Date(date).toLocaleTimeString()}`;
+							).toLocaleDateString()} / ${new Date(date).toLocaleTimeString(
+								[],
+								{ hour: '2-digit', minute: '2-digit' },
+							)}`;
 							return (
 								<div
 									key={_id}
 									onClick={() => {
 										handleReseravationClick(_id);
 									}}
-									className='reservation'
+									className={`reservation`}
 								>
 									<h2 className='name'>
 										Reservation for {name} @ {formattedDateTime}
@@ -77,21 +84,26 @@ function App() {
 						<h2 className='content-name'>
 							{currentReservation && (
 								<>
-									Reservation for {currentReservation.name} at{' '}
+									Reservation for {currentReservation.name ?? 'Guest'} at{' '}
 									{currentReservation.date
 										? new Date(currentReservation.date).toLocaleDateString()
-										: ''}{' '}
+										: 'Time'}{' '}
 									for{' '}
 									{currentReservation.date
-										? new Date(currentReservation.date).toLocaleTimeString()
-										: ''}
+										? new Date(currentReservation.date).toLocaleTimeString([], {
+												hour: '2-digit',
+												minute: '2-digit',
+										  })
+										: 'Date'}
 								</>
 							)}
 						</h2>
 
-						<p className='content-email'>Email: {currentReservation.email}</p>
+						<p className='content-email'>
+							Email: {currentReservation.email ?? 'guest123@email.com'}
+						</p>
 						<p className='content-size'>
-							Party Size: {currentReservation.people}
+							Party Size: {currentReservation.people ?? '0'}
 						</p>
 						<button
 							className='check-in-btn'
