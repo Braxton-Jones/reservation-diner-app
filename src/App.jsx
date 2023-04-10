@@ -84,11 +84,11 @@ function App() {
 						<h2 className='content-name'>
 							{currentReservation && (
 								<>
-									Reservation for {currentReservation.name ?? 'Guest'} at{' '}
+									Reservation for {currentReservation.name ?? 'Guest'} for {' '}
 									{currentReservation.date
 										? new Date(currentReservation.date).toLocaleDateString()
 										: 'Time'}{' '}
-									for{' '}
+									at {' '}
 									{currentReservation.date
 										? new Date(currentReservation.date).toLocaleTimeString([], {
 												hour: '2-digit',
